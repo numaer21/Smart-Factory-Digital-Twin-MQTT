@@ -1,0 +1,28 @@
+# Secrets and environment files
+.env
+*.env
+secrets.h
+
+# Node-RED credentials
+flows_cred.json
+*_cred.json
+
+# SSH and private keys
+*.pem
+*.key
+id_rsa
+id_ed25519
+
+# Arduino build files
+build/
+*.bin
+*.elf
+*.hex
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/

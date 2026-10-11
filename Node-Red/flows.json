@@ -1,0 +1,1218 @@
+[
+    {
+        "id": "6c2f4babd388c156",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d75373a7b9c5aaf3",
+        "type": "mqtt-broker",
+        "name": "Local Mosquitto",
+        "broker": "localhost",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "78cd469ea6d65501",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "1c9267c5b560740c",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#fcfcfd",
+            "primary": "#0d74ce",
+            "bgPage": "#f9f9fb",
+            "groupBg": "#ffffff",
+            "groupOutline": "#d9d9e0"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "fb955dc755c9e793",
+        "type": "ui-page",
+        "name": "Page 1",
+        "ui": "78cd469ea6d65501",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "1c9267c5b560740c",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": 0,
+                "cols": 3
+            },
+            {
+                "name": "Tablet",
+                "px": 576,
+                "cols": 6
+            },
+            {
+                "name": "Small Desktop",
+                "px": 768,
+                "cols": 9
+            },
+            {
+                "name": "Desktop",
+                "px": 1024,
+                "cols": 12
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "a2d4b31902b73b07",
+        "type": "ui-group",
+        "name": "Smart Factory",
+        "page": "fb955dc755c9e793",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "c3e99933a57bc782",
+        "type": "mqtt in",
+        "z": "6c2f4babd388c156",
+        "name": "Telemetry",
+        "topic": "factory/machine01/telemetry",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "d75373a7b9c5aaf3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 180,
+        "wires": [
+            [
+                "1e50de5058597081"
+            ]
+        ]
+    },
+    {
+        "id": "1e50de5058597081",
+        "type": "json",
+        "z": "6c2f4babd388c156",
+        "name": "Parse Telemetry",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 300,
+        "y": 320,
+        "wires": [
+            [
+                "6f7f625dfb33e331",
+                "b4cbaf78fd26180c",
+                "8da939ce11225a56",
+                "9a4088f90b0f29fe",
+                "7b4c922c44e98be4",
+                "538c01b6d398aaea",
+                "96356ec30a792afa",
+                "c9e9dafc376690a7"
+            ]
+        ]
+    },
+    {
+        "id": "6f7f625dfb33e331",
+        "type": "debug",
+        "z": "6c2f4babd388c156",
+        "name": "Telemetry Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "b4cbaf78fd26180c",
+        "type": "change",
+        "z": "6c2f4babd388c156",
+        "name": "Temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 240,
+        "wires": [
+            [
+                "6f4d5d25c097e298",
+                "0a4794e57b29ff6b"
+            ]
+        ]
+    },
+    {
+        "id": "6f4d5d25c097e298",
+        "type": "debug",
+        "z": "6c2f4babd388c156",
+        "name": "Temperature Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "8da939ce11225a56",
+        "type": "change",
+        "z": "6c2f4babd388c156",
+        "name": "RPM",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.rpm",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 320,
+        "wires": [
+            [
+                "f713456ef049f6f4",
+                "9c39bcfdaa3aa94a"
+            ]
+        ]
+    },
+    {
+        "id": "f713456ef049f6f4",
+        "type": "debug",
+        "z": "6c2f4babd388c156",
+        "name": "RPM Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "9a4088f90b0f29fe",
+        "type": "change",
+        "z": "6c2f4babd388c156",
+        "name": "Vibration",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.vibration",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 400,
+        "wires": [
+            [
+                "f7b9fdd6afa9998d",
+                "93adc74eb5c45ca2"
+            ]
+        ]
+    },
+    {
+        "id": "f7b9fdd6afa9998d",
+        "type": "debug",
+        "z": "6c2f4babd388c156",
+        "name": "Vibration Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "7b4c922c44e98be4",
+        "type": "change",
+        "z": "6c2f4babd388c156",
+        "name": "Load",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.load",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 480,
+        "wires": [
+            [
+                "673e74e625d0adb1",
+                "8a6f7efb2d52b495"
+            ]
+        ]
+    },
+    {
+        "id": "673e74e625d0adb1",
+        "type": "debug",
+        "z": "6c2f4babd388c156",
+        "name": "Load Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "538c01b6d398aaea",
+        "type": "function",
+        "z": "6c2f4babd388c156",
+        "name": "Health Logic",
+        "func": "let data = msg.payload;\n\nif (\n    data.temperature > 55 ||\n    data.vibration > 3.5 ||\n    data.load > 75\n) {\n    msg.payload = \"WARNING\";\n} else {\n    msg.payload = \"HEALTHY\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 560,
+        "wires": [
+            [
+                "5de1dfb32be98e53",
+                "16ee2bcb5296c01c"
+            ]
+        ]
+    },
+    {
+        "id": "5de1dfb32be98e53",
+        "type": "debug",
+        "z": "6c2f4babd388c156",
+        "name": "Health Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "96356ec30a792afa",
+        "type": "function",
+        "z": "6c2f4babd388c156",
+        "name": "Fault Reason",
+        "func": "let data = msg.payload;\nlet problems = [];\n\nif (data.temperature > 55) {\n    problems.push(\"HIGH TEMPERATURE\");\n}\n\nif (data.vibration > 3.5) {\n    problems.push(\"HIGH VIBRATION\");\n}\n\nif (data.load > 75) {\n    problems.push(\"OVERLOAD\");\n}\n\nif (problems.length === 0) {\n    msg.payload = \"NONE\";\n} else {\n    msg.payload = problems.join(\" | \");\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 640,
+        "wires": [
+            [
+                "64129faa9fe134e6",
+                "9bcbda78612e0d06"
+            ]
+        ]
+    },
+    {
+        "id": "64129faa9fe134e6",
+        "type": "debug",
+        "z": "6c2f4babd388c156",
+        "name": "Fault Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "c9e9dafc376690a7",
+        "type": "function",
+        "z": "6c2f4babd388c156",
+        "name": "Health Score",
+        "func": "let data = msg.payload;\nlet score = 100;\n\nif (data.temperature > 55) {\n    score -= 20;\n}\n\nif (data.vibration > 3.5) {\n    score -= 25;\n}\n\nif (data.load > 75) {\n    score -= 15;\n}\n\nif (score < 0) {\n    score = 0;\n}\n\nmsg.payload = score;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 720,
+        "wires": [
+            [
+                "597e0cab6e94f3fc",
+                "b7029e839ae02a03"
+            ]
+        ]
+    },
+    {
+        "id": "597e0cab6e94f3fc",
+        "type": "debug",
+        "z": "6c2f4babd388c156",
+        "name": "Health Score Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "e785aacca73f3861",
+        "type": "mqtt in",
+        "z": "6c2f4babd388c156",
+        "name": "Machine Status",
+        "topic": "factory/machine01/status",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "d75373a7b9c5aaf3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 760,
+        "wires": [
+            [
+                "fbad04e50db91b64",
+                "69e741e03bdcdbdf"
+            ]
+        ]
+    },
+    {
+        "id": "fbad04e50db91b64",
+        "type": "debug",
+        "z": "6c2f4babd388c156",
+        "name": "Status Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "983b431182a201dc",
+        "type": "mqtt in",
+        "z": "6c2f4babd388c156",
+        "name": "Machine State",
+        "topic": "factory/machine01/state",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "d75373a7b9c5aaf3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 860,
+        "wires": [
+            [
+                "88f8624b9ee5d718",
+                "773ec74840d94e3f"
+            ]
+        ]
+    },
+    {
+        "id": "88f8624b9ee5d718",
+        "type": "debug",
+        "z": "6c2f4babd388c156",
+        "name": "State Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 330,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "5874026e84fdcfd0",
+        "type": "mqtt out",
+        "z": "6c2f4babd388c156",
+        "name": "Machine Command",
+        "topic": "factory/machine01/command",
+        "qos": "1",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d75373a7b9c5aaf3",
+        "x": 610,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "0b4d1488b73465f6",
+        "type": "inject",
+        "z": "6c2f4babd388c156",
+        "name": "Test Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "START",
+        "payloadType": "str",
+        "x": 380,
+        "y": 940,
+        "wires": [
+            [
+                "5874026e84fdcfd0"
+            ]
+        ]
+    },
+    {
+        "id": "0a4794e57b29ff6b",
+        "type": "ui-gauge",
+        "z": "6c2f4babd388c156",
+        "name": "Temperature Gauge",
+        "group": "a2d4b31902b73b07",
+        "order": 11,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Temperature",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "°C",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "4",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "7",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 800,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9c39bcfdaa3aa94a",
+        "type": "ui-gauge",
+        "z": "6c2f4babd388c156",
+        "name": "RPM Gauge",
+        "group": "a2d4b31902b73b07",
+        "order": 10,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "RPM",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "RPM",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "4",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "7",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "3000",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 770,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "93adc74eb5c45ca2",
+        "type": "ui-gauge",
+        "z": "6c2f4babd388c156",
+        "name": "Vibration Gauge",
+        "group": "a2d4b31902b73b07",
+        "order": 9,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Vibration",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "mm/s",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "4",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "7",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "10",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 780,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8a6f7efb2d52b495",
+        "type": "ui-gauge",
+        "z": "6c2f4babd388c156",
+        "name": "Load Gauge",
+        "group": "a2d4b31902b73b07",
+        "order": 7,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Load",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "%",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "4",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "7",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 770,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "16ee2bcb5296c01c",
+        "type": "ui-text",
+        "z": "6c2f4babd388c156",
+        "group": "a2d4b31902b73b07",
+        "order": 15,
+        "width": 0,
+        "height": 0,
+        "name": "Machine Health",
+        "label": "Machine Health",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 780,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "9bcbda78612e0d06",
+        "type": "ui-text",
+        "z": "6c2f4babd388c156",
+        "group": "a2d4b31902b73b07",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "name": "Fault Reason",
+        "label": "Fault Reason",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 770,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "b7029e839ae02a03",
+        "type": "ui-gauge",
+        "z": "6c2f4babd388c156",
+        "name": " Machine Health Gauge",
+        "group": "a2d4b31902b73b07",
+        "order": 8,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": " Machine Health Score",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "%",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "4",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "7",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 800,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "69e741e03bdcdbdf",
+        "type": "ui-text",
+        "z": "6c2f4babd388c156",
+        "group": "a2d4b31902b73b07",
+        "order": 13,
+        "width": 0,
+        "height": 0,
+        "name": " Machine Status",
+        "label": " Machine Status",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 340,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "773ec74840d94e3f",
+        "type": "ui-text",
+        "z": "6c2f4babd388c156",
+        "group": "a2d4b31902b73b07",
+        "order": 14,
+        "width": 0,
+        "height": 0,
+        "name": " Machine State",
+        "label": " Machine State",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 340,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "f6d5094be8578126",
+        "type": "ui-button",
+        "z": "6c2f4babd388c156",
+        "group": "a2d4b31902b73b07",
+        "name": "Start Machine",
+        "label": "START",
+        "order": 16,
+        "width": 0,
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "START",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 360,
+        "y": 980,
+        "wires": [
+            [
+                "5874026e84fdcfd0"
+            ]
+        ]
+    },
+    {
+        "id": "53858df68a7e94cf",
+        "type": "ui-button",
+        "z": "6c2f4babd388c156",
+        "group": "a2d4b31902b73b07",
+        "name": "Stop Machine",
+        "label": "STOP",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "STOP",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 360,
+        "y": 1020,
+        "wires": [
+            [
+                "5874026e84fdcfd0"
+            ]
+        ]
+    },
+    {
+        "id": "aae029ef8ce2e0cd",
+        "type": "ui-button",
+        "z": "6c2f4babd388c156",
+        "group": "a2d4b31902b73b07",
+        "name": " Simulate Overheat",
+        "label": "SIMULATE OVERHEAT",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "FAULT_OVERHEAT",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 350,
+        "y": 1060,
+        "wires": [
+            [
+                "5874026e84fdcfd0"
+            ]
+        ]
+    },
+    {
+        "id": "d55ccdafb944c90a",
+        "type": "ui-button",
+        "z": "6c2f4babd388c156",
+        "group": "a2d4b31902b73b07",
+        "name": "Simulate High Vibration",
+        "label": "SIMULATE HIGH VIBRATION",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "FAULT_VIBRATION",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 330,
+        "y": 1100,
+        "wires": [
+            [
+                "5874026e84fdcfd0"
+            ]
+        ]
+    },
+    {
+        "id": "818b6119ced8fed9",
+        "type": "ui-button",
+        "z": "6c2f4babd388c156",
+        "group": "a2d4b31902b73b07",
+        "name": "Simulate Overload",
+        "label": "SIMULATE OVERLOAD",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "FAULT_OVERLOAD",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 350,
+        "y": 1140,
+        "wires": [
+            [
+                "5874026e84fdcfd0"
+            ]
+        ]
+    },
+    {
+        "id": "aad1f14e200320f9",
+        "type": "ui-button",
+        "z": "6c2f4babd388c156",
+        "group": "a2d4b31902b73b07",
+        "name": " Reset Fault",
+        "label": "RESET FAULT",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "RESET_FAULT",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 370,
+        "y": 1180,
+        "wires": [
+            [
+                "5874026e84fdcfd0"
+            ]
+        ]
+    },
+    {
+        "id": "88180c52c0f3a141",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.32.0"
+        }
+    }
+]
