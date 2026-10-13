@@ -919,10 +919,10 @@ Possible future improvements include:
 Developed and maintained by:
 
 - **Numaer Abdus Salique**  
-  GitHub: [numaer21](https://github.com/username1)
+  GitHub: [numaer21](https://github.com/numaer21)
 
 - **Nirzor Deb Opi**  
-  GitHub: [username2](https://github.com/username2)
+  GitHub: [nirzor-deb-25](https://github.com/nirzor-deb-25)
 
 ---
 
